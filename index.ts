@@ -1,23 +1,47 @@
 import type { AstroIntegration } from 'astro'
 
-export default function createIntegration(): AstroIntegration {
-  // See the Integration API docs for full details
-  // https://docs.astro.build/en/reference/integrations-reference/
+export interface Options {
+}
+
+export default function createIntegration(options: Options = { }): AstroIntegration {
   return {
     name: '@example/my-integration',
     hooks: {
-      'astro:config:setup': () => {
-        // See the @astrojs/react integration for an example
-        // https://github.com/withastro/astro/blob/main/packages/integrations/react/src/index.ts
-      },
-      'astro:build:start': ({ buildConfig }) => {
-        // See the @astrojs/netlify integration for an example
-        // https://github.com/withastro/astro/blob/main/packages/integrations/netlify/src/integration-functions.ts
-      },
-      'astro:build:done': ({ dir, routes }) => {
-        // See the @astrojs/partytown integration for an example
-        // https://github.com/withastro/astro/blob/main/packages/integrations/partytown/src/index.ts
-      },
+      'astro:config:setup': ({ injectRoute }) => {
+        injectRoute({
+          pattern: '/[schema]',
+          entryPoint: '@getflow/cms/routes/[schema]/index.astro'
+        })
+        injectRoute({
+          pattern: '/[schema]/index.json',
+          entryPoint: '@getflow/cms/routes/[schema]/index.json.ts'
+        })
+        injectRoute({
+          pattern: '/[schema]/index.jsonld',
+          entryPoint: '@getflow/cms/routes/[schema]/index.jsonld.ts'
+        })
+
+        injectRoute({
+          pattern: '/[schema]/[id]',
+          entryPoint: '@getflow/cms/routes/[schema]/[id]/index.astro'
+        })
+        injectRoute({
+          pattern: '/[schema]/[id]/index.json',
+          entryPoint: '@getflow/cms/routes/[schema]/[id]/index.json.ts'
+        })
+        injectRoute({
+          pattern: '/[schema]/[id]/index.jsonld',
+          entryPoint: '@getflow/cms/routes/[schema]/[id]/index.jsonld.ts'
+        })
+        injectRoute({
+          pattern: '/[schema]/[id]/index.md',
+          entryPoint: '@getflow/cms/routes/[schema]/[id]/index.md.ts'
+        })
+        injectRoute({
+          pattern: '/[schema]/[id]/feed.xml',
+          entryPoint: '@getflow/cms/routes/[schema]/[id]/feed.xml.ts'
+        })
+      }
     },
   }
 }

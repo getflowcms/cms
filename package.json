@@ -14,10 +14,9 @@
   ],
   "keywords": [],
   "scripts": {
-    "format": "prettier --ignore-path .gitignore .",
-    "format:fix": "prettier --ignore-path .gitignore -w .",
-    "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
-    "lint:fix": "eslint --fix --ignore-path .eslintignore --ext .js,.ts,.astro --fix ."
+    "format": "run-s format:*",
+    "format:prettier": "prettier --ignore-path .gitignore -w .",
+    "format:eslint": "eslint --fix --ignore-path .eslintignore --ext .js,.ts,.astro --fix ."
   },
   "repository": {
     "type": "git",
@@ -34,15 +33,25 @@
   },
   "homepage": "https://github.com/getflowcms/cms",
   "devDependencies": {
+    "@astrojs/rss": "^1.0.3",
+    "@types/js-yaml": "^4.0.5",
+    "@types/pluralize": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
     "astro": "^1.6.0",
+    "astro-remote": "^0.2.3",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-astro": "^0.21.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
+    "js-yaml": "^4.1.0",
+    "npm-run-all": "^4.1.5",
+    "pluralize": "^8.0.0",
     "prettier": "^2.7.1",
-    "prettier-plugin-astro": "^0.7.0"
+    "prettier-plugin-astro": "^0.7.0",
+    "schema-dts": "^1.1.0",
+    "typescript": "^4.8.4",
+    "zod": "^3.19.1"
   },
   "peerDependencies": {
     "astro": "^1.6.0"
